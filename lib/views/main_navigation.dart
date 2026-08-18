@@ -15,21 +15,41 @@ class MainNavigationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(bottomNavIndexProvider);
-    final screens = [const HomeScreen(), const ActivityScreen(), const ScannerScreen(), const ProfileScreen()];
+    final screens = [
+      const HomeScreen(),
+      const ActivityScreen(),
+      const ScannerScreen(),
+      const ProfileScreen(),
+    ];
 
     return Scaffold(
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (index) => ref.read(bottomNavIndexProvider.notifier).setIndex(index),
-        selectedItemColor: AppTheme.softTeal,
-        unselectedItemColor: Colors.grey,
+        onTap: (index) =>
+            ref.read(bottomNavIndexProvider.notifier).setIndex(index),
+        selectedItemColor: AppTheme.primaryOrange,
+        unselectedItemColor: AppTheme.textSecondary,
+        backgroundColor: AppTheme.cardWhite,
+        elevation: 0,
         type: BottomNavigationBarType.fixed,
         items: [
-          BottomNavigationBarItem(icon: const Icon(Icons.home_outlined), label: t('nav_home', ref)),
-          BottomNavigationBarItem(icon: const Icon(Icons.list_alt_outlined), label: t('nav_activity', ref)),
-          BottomNavigationBarItem(icon: const Icon(Icons.qr_code_scanner), label: t('nav_scan', ref)),
-          BottomNavigationBarItem(icon: const Icon(Icons.person_outline), label: t('nav_profile', ref)),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home_outlined),
+            label: t('nav_home', ref),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.list_alt_outlined),
+            label: t('nav_activity', ref),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.qr_code_scanner),
+            label: t('nav_scan', ref),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person_outline),
+            label: t('nav_profile', ref),
+          ),
         ],
       ),
     );

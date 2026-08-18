@@ -28,22 +28,22 @@ class ProfileScreen extends ConsumerWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(color: AppTheme.cardWhite, borderRadius: BorderRadius.circular(16)),
             child: Row(
               children: [
                 Container(
                   width: 60,
                   height: 60,
                   decoration: const BoxDecoration(shape: BoxShape.circle, gradient: AppTheme.mainGradient),
-                  child: const Icon(Icons.person, color: Colors.white, size: 36),
+                  child: const Icon(Icons.person, color: AppTheme.textOnPrimary, size: 36),
                 ),
                 const SizedBox(width: 16),
                 const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('vivianxxx@gmail.com', style: TextStyle(color: Colors.grey)),
+                    Text('vivianxxx@gmail.com', style: TextStyle(color: AppTheme.textSecondary)),
                     SizedBox(height: 4),
-                    Text('9xxxxxx1', style: TextStyle(color: Colors.grey)),
+                    Text('9xxxxxx1', style: TextStyle(color: AppTheme.textSecondary)),
                   ],
                 ),
               ],
@@ -53,9 +53,13 @@ class ProfileScreen extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              gradient: AppTheme.mainGradient,
+              gradient: const LinearGradient(
+                colors: [AppTheme.staffCardBackground, AppTheme.primaryOrange],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
               borderRadius: BorderRadius.circular(16),
-              boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 5))],
+              boxShadow: const [BoxShadow(color: AppTheme.shadowColor, blurRadius: 10, offset: Offset(0, 5))],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,14 +72,14 @@ class ProfileScreen extends ConsumerWidget {
                       children: [
                         Text(
                           t('org_name', ref),
-                          style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                          style: const TextStyle(color: AppTheme.textOnPrimary, fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        Text(t('org_sub', ref), style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                        Text(t('org_sub', ref), style: const TextStyle(color: AppTheme.staffCardSubtext, fontSize: 12)),
                       ],
                     ),
                     Chip(
-                      label: Text(t('e_tutor_cert', ref), style: const TextStyle(color: Colors.white, fontSize: 12)),
-                      backgroundColor: Colors.white30,
+                      label: Text(t('e_tutor_cert', ref), style: const TextStyle(color: AppTheme.textOnLightAccent, fontSize: 12)),
+                      backgroundColor: AppTheme.softOrange,
                       side: BorderSide.none,
                     ),
                   ],
@@ -86,15 +90,15 @@ class ProfileScreen extends ConsumerWidget {
                     children: [
                       Text(
                         t('org_name', ref),
-                        style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+                        style: const TextStyle(color: AppTheme.textOnPrimary, fontSize: 26, fontWeight: FontWeight.bold),
                       ),
-                      Text(t('org_sub', ref), style: const TextStyle(color: Colors.white70, fontSize: 16)),
+                      Text(t('org_sub', ref), style: const TextStyle(color: AppTheme.staffCardSubtext, fontSize: 16)),
                     ],
                   ),
                 ),
                 const SizedBox(height: 32),
-                Text(t('cert_no', ref), style: const TextStyle(color: Colors.white70, fontSize: 12)),
-                const Text('SDYT-2026-000', style: TextStyle(color: Colors.white, fontSize: 18, letterSpacing: 2)),
+                Text(t('cert_no', ref), style: const TextStyle(color: AppTheme.staffCardSubtext, fontSize: 12)),
+                const Text('SDYT-2026-000', style: TextStyle(color: AppTheme.textOnPrimary, fontSize: 18, letterSpacing: 2)),
               ],
             ),
           ),
@@ -111,19 +115,19 @@ class ProfileScreen extends ConsumerWidget {
             _buildTile(
               Icons.language,
               t('lang_setting', ref),
-              trailing: Text(_getLangName(ref.watch(languageProvider)), style: const TextStyle(color: Colors.grey)),
+              trailing: Text(_getLangName(ref.watch(languageProvider)), style: const TextStyle(color: AppTheme.textSecondary)),
             ),
           ]),
           const SizedBox(height: 16),
           _buildMenuBlock([
-            _buildTile(Icons.door_back_door, t('logout', ref), color: Colors.redAccent, trailing: const SizedBox.shrink()),
-          ], color: const Color(0xFFFFEBEB)),
+            _buildTile(Icons.door_back_door, t('logout', ref), color: AppTheme.dangerRed, trailing: const SizedBox.shrink()),
+          ], color: AppTheme.dangerSoft),
           const SizedBox(height: 16),
-          _buildMenuBlock([_buildTile(Icons.close, t('delete_account', ref), color: Colors.redAccent, trailing: const SizedBox.shrink())]),
+          _buildMenuBlock([_buildTile(Icons.close, t('delete_account', ref), color: AppTheme.dangerRed, trailing: const SizedBox.shrink())]),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 24),
             child: Center(
-              child: Text('Version 1.0.33', style: TextStyle(color: Colors.grey)),
+              child: Text('Version 1.0.33', style: TextStyle(color: AppTheme.textSecondary)),
             ),
           ),
         ],
@@ -136,22 +140,28 @@ class ProfileScreen extends ConsumerWidget {
     child: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
   );
 
-  Widget _buildMenuBlock(List<Widget> children, {Color color = Colors.white}) {
+  Widget _buildMenuBlock(List<Widget> children, {Color color = AppTheme.cardWhite}) {
     return Container(
       decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(16)),
       child: Column(children: children),
     );
   }
 
-  Widget _buildTile(IconData icon, String title, {Widget? trailing, Color color = Colors.black87}) {
-    return ListTile(
-      leading: Icon(icon, color: color),
-      title: Text(
-        title,
-        style: TextStyle(color: color, fontWeight: FontWeight.bold),
+  Widget _buildTile(IconData icon, String title, {Widget? trailing, Color color = AppTheme.textPrimary}) {
+    return Material(
+      type: MaterialType.transparency,
+      child: ListTile(
+        tileColor: AppTheme.cardWhite,
+        splashColor: AppTheme.primaryOrange.withValues(alpha: 0.12),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        leading: Icon(icon, color: color),
+        title: Text(
+          title,
+          style: TextStyle(color: color, fontWeight: FontWeight.normal),
+        ),
+        trailing: trailing ?? const Icon(Icons.arrow_forward, size: 18, color: AppTheme.textPrimary),
+        onTap: () {},
       ),
-      trailing: trailing ?? const Icon(Icons.arrow_forward, size: 18, color: Colors.black),
-      onTap: () {},
     );
   }
 
@@ -159,9 +169,9 @@ class ProfileScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.cardWhite,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3))],
+        boxShadow: const [BoxShadow(color: AppTheme.shadowColor, blurRadius: 6, offset: Offset(0, 3))],
       ),
       child: Column(
         children: [
@@ -171,7 +181,7 @@ class ProfileScreen extends ConsumerWidget {
               Expanded(
                 child: Text(t('teaching_stats', ref), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
               ),
-              const Icon(Icons.info_outline, color: Colors.grey, size: 18),
+              const Icon(Icons.info_outline, color: AppTheme.textSecondary, size: 18),
             ],
           ),
           const Divider(height: 24),
@@ -197,7 +207,7 @@ class ProfileScreen extends ConsumerWidget {
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.darkTeal),
         ),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+        Text(label, style: const TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
       ],
     );
   }

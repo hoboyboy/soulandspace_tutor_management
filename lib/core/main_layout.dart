@@ -16,9 +16,16 @@ class MainLayout extends ConsumerWidget {
     final currentLang = ref.watch(languageProvider);
 
     return Scaffold(
+      backgroundColor: AppTheme.backgroundGrey,
       body: Stack(
         children: [
-          Container(height: 220, decoration: const BoxDecoration(gradient: AppTheme.mainGradient)),
+          Container(
+            height: 220,
+            decoration: const BoxDecoration(
+              gradient: AppTheme.mainGradient,
+              boxShadow: [BoxShadow(color: Color(0x1A000000), blurRadius: 14, offset: Offset(0, 6))],
+            ),
+          ),
           SafeArea(
             bottom: false,
             child: Column(
@@ -40,14 +47,14 @@ class MainLayout extends ConsumerWidget {
                                   IconButton(
                                     padding: EdgeInsets.zero,
                                     constraints: const BoxConstraints(),
-                                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                                    icon: const Icon(Icons.arrow_back, color: AppTheme.textOnPrimary),
                                     onPressed: () => Navigator.pop(context),
                                   ),
                                 if (showBack) const SizedBox(width: 8),
                                 DefaultTextStyle(
-                                  style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                  style: const TextStyle(color: AppTheme.textOnPrimary, fontSize: 20, fontWeight: FontWeight.bold),
                                   child: IconTheme(
-                                    data: const IconThemeData(color: Colors.white, size: 24),
+                                    data: const IconThemeData(color: AppTheme.textOnPrimary, size: 24),
                                     child: titleWidget,
                                   ),
                                 ),
@@ -58,13 +65,17 @@ class MainLayout extends ConsumerWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                        decoration: BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.circular(8)),
+                        decoration: BoxDecoration(
+                          color: AppTheme.deepOrange,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: AppTheme.textOnPrimary.withValues(alpha: 0.35), width: 1),
+                        ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<AppLanguage>(
                             value: currentLang,
-                            dropdownColor: AppTheme.primaryTeal,
-                            icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                            dropdownColor: AppTheme.deepOrange,
+                            icon: const Icon(Icons.arrow_drop_down, color: AppTheme.textOnPrimary),
+                            style: const TextStyle(color: AppTheme.textOnPrimary, fontWeight: FontWeight.bold),
                             items: const [
                               DropdownMenuItem(value: AppLanguage.en, child: Text('EN')),
                               DropdownMenuItem(value: AppLanguage.tc, child: Text('繁體')),

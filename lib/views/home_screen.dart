@@ -14,7 +14,10 @@ class HomeScreen extends ConsumerWidget {
     final showNotice = ref.watch(notificationProvider);
 
     return MainLayout(
-      titleWidget: Row(mainAxisSize: MainAxisSize.min, children: [Text('${t('today_is', ref)} '), Text(t('date_value', ref))]),
+      titleWidget: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [Text('${t('today_is', ref)} '), Text(t('date_value', ref))],
+      ),
       child: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -23,35 +26,67 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             Text(
               t('pending_notices', ref),
-              style: const TextStyle(color: Colors.redAccent, fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                color: AppTheme.dangerRed,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(color: const Color(0xFFFFEBEB), borderRadius: BorderRadius.circular(16)),
+              decoration: BoxDecoration(
+                color: AppTheme.dangerSoft,
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Row(
                 children: [
-                  const Icon(Icons.notifications_active, color: Colors.redAccent),
+                  const Icon(
+                    Icons.notifications_active,
+                    color: AppTheme.dangerRed,
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(t('activity_reminder', ref), style: const TextStyle(fontWeight: FontWeight.bold)),
-                        Text(t('summer_chinese', ref), style: const TextStyle(fontWeight: FontWeight.bold)),
-                        const Text('2026-08-17 14:45', style: TextStyle(fontSize: 13)),
+                        Text(
+                          t('activity_reminder', ref),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          t('summer_chinese', ref),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Text(
+                          '2026-08-17 14:45',
+                          style: TextStyle(fontSize: 13),
+                        ),
                         const SizedBox(height: 4),
-                        Text(t('click_confirm', ref), style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                        Text(
+                          t('click_confirm', ref),
+                          style: const TextStyle(
+                            color: AppTheme.textSecondary,
+                            fontSize: 12,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      backgroundColor: AppTheme.dangerRed,
+                      foregroundColor: AppTheme.textOnPrimary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
-                    onPressed: () => ref.read(notificationProvider.notifier).dismiss(),
-                    child: Text(t('i_know', ref), style: const TextStyle(color: Colors.white)),
+                    onPressed: () =>
+                        ref.read(notificationProvider.notifier).dismiss(),
+                    child: Text(
+                      t('i_know', ref),
+                      style: const TextStyle(color: AppTheme.textOnPrimary),
+                    ),
                   ),
                 ],
               ),
@@ -60,20 +95,32 @@ class HomeScreen extends ConsumerWidget {
           const SizedBox(height: 24),
           Row(
             children: [
-              const Icon(Icons.calendar_month, color: Colors.redAccent),
+              const Icon(Icons.calendar_month, color: AppTheme.primaryOrange),
               const SizedBox(width: 8),
-              Text(t('today_activities', ref), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(
+                t('today_activities', ref),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 60),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(
+              color: AppTheme.cardWhite,
+              borderRadius: BorderRadius.circular(16),
+            ),
             child: Column(
               children: [
-                Icon(Icons.event_available, size: 60, color: Colors.grey.shade300),
+                Icon(Icons.event_available, size: 60, color: AppTheme.lineSoft),
                 const SizedBox(height: 16),
-                Text(t('no_activities', ref), style: const TextStyle(color: Colors.grey)),
+                Text(
+                  t('no_activities', ref),
+                  style: const TextStyle(color: AppTheme.textSecondary),
+                ),
               ],
             ),
           ),
@@ -86,9 +133,15 @@ class HomeScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.cardWhite,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3))],
+        boxShadow: const [
+          BoxShadow(
+            color: AppTheme.shadowColor,
+            blurRadius: 6,
+            offset: Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         children: [
@@ -96,9 +149,19 @@ class HomeScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Text(t('teaching_stats', ref), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                child: Text(
+                  t('teaching_stats', ref),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
               ),
-              const Icon(Icons.info_outline, color: Colors.grey, size: 18),
+              const Icon(
+                Icons.info_outline,
+                color: AppTheme.textSecondary,
+                size: 18,
+              ),
             ],
           ),
           const Divider(height: 24),
@@ -121,10 +184,17 @@ class HomeScreen extends ConsumerWidget {
       children: [
         Text(
           val,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.darkTeal),
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppTheme.darkTeal,
+          ),
         ),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+        ),
       ],
     );
   }

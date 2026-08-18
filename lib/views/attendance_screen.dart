@@ -13,42 +13,71 @@ class AttendanceScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final students = ref.watch(attendanceProvider);
-    final presentCount = students.where((s) => s.status == AttendanceStatus.present).length;
+    final presentCount = students
+        .where((s) => s.status == AttendanceStatus.present)
+        .length;
     final total = students.length;
-    final percentage = total > 0 ? (presentCount / total * 100).toStringAsFixed(0) : '0';
+    final percentage = total > 0
+        ? (presentCount / total * 100).toStringAsFixed(0)
+        : '0';
 
     return MainLayout(
       showBack: true,
-      titleWidget: Row(mainAxisSize: MainAxisSize.min, children: [const Icon(Icons.check_box), const SizedBox(width: 8), Text(t('roll_call_sys', ref))]),
+      titleWidget: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.check_box),
+          const SizedBox(width: 8),
+          Text(t('roll_call_sys', ref)),
+        ],
+      ),
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(16),
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(
+              color: AppTheme.cardWhite,
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Column(
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.school, color: Colors.green),
+                    Icon(Icons.school, color: AppTheme.successGreen),
                     SizedBox(width: 8),
-                    Text('P 1專注力小組 (中一)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text(
+                      'P 1專注力小組 (中一)',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
                 const Divider(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [_statItem('$presentCount人', t('present', ref)), _statItem('${total - presentCount}人', t('absent', ref))],
+                  children: [
+                    _statItem('$presentCount人', t('present', ref)),
+                    _statItem('${total - presentCount}人', t('absent', ref)),
+                  ],
                 ),
                 const SizedBox(height: 12),
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 8),
-                  decoration: BoxDecoration(color: AppTheme.softTeal.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(
+                    color: AppTheme.softTeal.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Text(
                     '${t('attendance_rate', ref)}: $percentage%',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: AppTheme.darkTeal, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      color: AppTheme.darkTeal,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -64,7 +93,8 @@ class AttendanceScreen extends ConsumerWidget {
                 mainAxisSpacing: 12,
               ),
               itemCount: students.length,
-              itemBuilder: (context, index) => _buildStudentCard(context, ref, students[index]),
+              itemBuilder: (context, index) =>
+                  _buildStudentCard(context, ref, students[index]),
             ),
           ),
         ],
@@ -72,8 +102,14 @@ class AttendanceScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildStudentCard(BuildContext context, WidgetRef ref, Student student) {
-    Color borderColor = student.status == AttendanceStatus.present ? Colors.green : Colors.red;
+  Widget _buildStudentCard(
+    BuildContext context,
+    WidgetRef ref,
+    Student student,
+  ) {
+    Color borderColor = student.status == AttendanceStatus.present
+        ? AppTheme.successGreen
+        : AppTheme.dangerRed;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -84,10 +120,25 @@ class AttendanceScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(student.status == AttendanceStatus.present ? Icons.check_circle : Icons.cancel, color: borderColor, size: 36),
+            Icon(
+              student.status == AttendanceStatus.present
+                  ? Icons.check_circle
+                  : Icons.cancel,
+              color: borderColor,
+              size: 36,
+            ),
             const SizedBox(height: 8),
-            Text(student.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-            Text(student.seat, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+            Text(
+              student.name,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            Text(
+              student.seat,
+              style: const TextStyle(
+                color: AppTheme.textSecondary,
+                fontSize: 12,
+              ),
+            ),
           ],
         ),
       ),
@@ -99,10 +150,17 @@ class AttendanceScreen extends ConsumerWidget {
       children: [
         Text(
           val,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.darkTeal),
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppTheme.darkTeal,
+          ),
         ),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+        ),
       ],
     );
   }

@@ -11,21 +11,37 @@ class ScannerScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MainLayout(
-      titleWidget: Row(mainAxisSize: MainAxisSize.min, children: [const Icon(Icons.camera_alt), const SizedBox(width: 8), Text(t('scan_title', ref))]),
+      titleWidget: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.camera_alt),
+          const SizedBox(width: 8),
+          Text(t('scan_title', ref)),
+        ],
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+              decoration: BoxDecoration(
+                color: AppTheme.cardWhite,
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.center_focus_weak, color: Colors.redAccent),
+                  const Icon(
+                    Icons.center_focus_weak,
+                    color: AppTheme.primaryOrange,
+                  ),
                   const SizedBox(width: 8),
                   Flexible(
-                    child: Text(t('scan_hint', ref), style: const TextStyle(color: Colors.black87)),
+                    child: Text(
+                      t('scan_hint', ref),
+                      style: const TextStyle(color: AppTheme.textPrimary),
+                    ),
                   ),
                 ],
               ),
@@ -34,20 +50,38 @@ class ScannerScreen extends ConsumerWidget {
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+                decoration: BoxDecoration(
+                  color: AppTheme.cardWhite,
+                  borderRadius: BorderRadius.circular(16),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(t('click_enable_cam', ref), style: const TextStyle(fontSize: 16)),
+                    Text(
+                      t('click_enable_cam', ref),
+                      style: const TextStyle(fontSize: 16),
+                    ),
                     const SizedBox(height: 24),
                     OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                        side: const BorderSide(color: AppTheme.softTeal),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 12,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        foregroundColor: AppTheme.primaryOrange,
+                        side: const BorderSide(color: AppTheme.primaryOrange),
                       ),
                       onPressed: () {},
-                      child: Text(t('enable_cam', ref), style: const TextStyle(color: AppTheme.softTeal, fontSize: 16)),
+                      child: Text(
+                        t('enable_cam', ref),
+                        style: const TextStyle(
+                          color: AppTheme.primaryOrange,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -60,15 +94,23 @@ class ScannerScreen extends ConsumerWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppTheme.actionOrange,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
                 ),
                 onPressed: () {},
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.keyboard, color: Colors.white),
+                    const Icon(Icons.keyboard, color: AppTheme.textOnPrimary),
                     const SizedBox(width: 8),
-                    Text(t('manual_code', ref), style: const TextStyle(color: Colors.white, fontSize: 16)),
+                    Text(
+                      t('manual_code', ref),
+                      style: const TextStyle(
+                        color: AppTheme.textOnPrimary,
+                        fontSize: 16,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -77,10 +119,20 @@ class ScannerScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.lightbulb, color: Colors.amber, size: 16),
+                const Icon(
+                  Icons.lightbulb,
+                  color: AppTheme.warningAmber,
+                  size: 16,
+                ),
                 const SizedBox(width: 8),
                 Flexible(
-                  child: Text(t('scan_tip', ref), style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                  child: Text(
+                    t('scan_tip', ref),
+                    style: const TextStyle(
+                      color: AppTheme.textSecondary,
+                      fontSize: 12,
+                    ),
+                  ),
                 ),
               ],
             ),
