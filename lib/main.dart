@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'core/theme.dart';
+import 'views/main_navigation.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: TutorApp()));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class TutorApp extends StatelessWidget {
+  const TutorApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
-    );
+    return MaterialApp(title: 'Souland Space Tutor App', debugShowCheckedModeBanner: false, theme: AppTheme.themeData, home: const MainNavigationScreen());
   }
 }

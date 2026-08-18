@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_riverpod: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
